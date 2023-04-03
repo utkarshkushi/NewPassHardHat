@@ -14,7 +14,7 @@ interface NakamigosContracts{
 
 contract NewPass is ERC721 {
     
-    address public nakaAddress = 0xd774557b647330C91Bf44cfEAB205095f7E6c367;
+    address public nakaAddress;
 
     uint16 counter = 0;
 
@@ -22,14 +22,25 @@ contract NewPass is ERC721 {
     
     
 
-    constructor() ERC721("ExampleTokens", "EXt") {
-        
+    constructor(address _nakaAddress) ERC721("ExampleTokens", "EXt") {
+        nakaAddress = _nakaAddress;
     }
+
+    function holdsNaka(address _to) public view returns(bool){
+        uint[] memory arr = NakamigosContracts(nakaAddress).tokensOfOwner(_to);
+        if(arr.length >= 1){
+            return true;
+        }
+        else{
+            return false;
+        }
+     }
 
     function newToken() external returns(bool) {
         require(msg.sender != address(0), "Not a valid address");
-        uint256[] memory arr = NakamigosContracts(nakaAddress).tokensOfOwner(msg.sender); 
-        require(arr.length >= 1, "You have no nakamigos NFTs");
+        require(passIssued[msg.sender] == false, "pass already issed");
+        bool holdsNakaTokens = holdsNaka(msg.sender);
+        require(holdsNakaTokens == true, "You have no nakamigos NFTs");
 
         uint256 newTokenId = counter++;
         _mint(msg.sender ,newTokenId);
