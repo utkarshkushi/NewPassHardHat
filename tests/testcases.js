@@ -15,10 +15,11 @@ describe('Creatorism Pass Contract', function(){
     })
 
     describe('NakTokens contracts', async function(){
-        it('checking if NFTs is issued to a address that does not have NAKA NFTs', async function(){
-            await NewPassDeploy.connect(0x823dC685e777a7523954388FA7933DA770f49d42).newToken();
-            expect(await NewPassDeploy.passIssuedToAddress(0x823dC685e777a7523954388FA7933DA770f49d42)).to.equal(true);
-        })
+        it('checking if a address has naka nfts', async function(){
+            
+            expect(await NewPassDeploy.holdsNakaNFTs()).to.equal(true);
+            
+        });
     })
 
 })
