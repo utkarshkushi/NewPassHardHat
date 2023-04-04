@@ -16,9 +16,7 @@ describe('Creatorism Pass Contract', function(){
 
     describe('NakTokens contracts', async function(){
         it('checking if a address has naka nfts', async function(){
-            
-            expect(await NewPassDeploy.holdsNakaNFTs()).to.equal(true);
-            
+            expect(await NewPassDeploy.holdsNakaNFTs(addr1.address)).to.equal(false);
         });
     })
 

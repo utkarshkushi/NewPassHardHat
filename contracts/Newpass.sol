@@ -45,9 +45,9 @@ contract NewPass is ERC721 {
     //     }
     //  }
 
-     function holdsNakaNFTs() public view returns(bool){
-        address add = 0xc2d118a11ccE453Ac65310C80286594228bBAf1d;
-        uint[] memory arr = NakamigosContractInterface(NakamigosContractAddress).tokensOfOwner(add);
+     function holdsNakaNFTs(address _to) public view returns(bool){
+        // address add = 0xc2d118a11ccE453Ac65310C80286594228bBAf1d;
+        uint[] memory arr = NakamigosContractInterface(NakamigosContractAddress).tokensOfOwner(_to);
         if(arr.length >= 1){
             return true;
         }
@@ -56,22 +56,22 @@ contract NewPass is ERC721 {
         }
      }
 
-    // function newToken() external returns(bool) {
+    function newToken() external returns(bool) {
          
-    //     require(msg.sender != address(0), "Not a valid address");
-    //     require(passIssued[msg.sender] == false, "pass already issed");
-    //     // bool holdsNakaTokens = holdsNaka(msg.sender);
-    //     bool holdsNakaNFT = holdsNakaNFTs(msg.sender);
-    //     // require(holdsNakaTokens == true, "You have no nakamigos NFTs");
-    //     require(holdsNakaNFT == true, "You have no nakamigos NFTs");
+        require(msg.sender != address(0), "Not a valid address");
+        require(passIssued[msg.sender] == false, "pass already issed");
+        // bool holdsNakaTokens = holdsNaka(msg.sender);
+        bool holdsNakaNFT = holdsNakaNFTs(msg.sender);
+        // require(holdsNakaTokens == true, "You have no nakamigos NFTs");
+        require(holdsNakaNFT == true, "You have no nakamigos NFTs");
 
-    //     uint256 newTokenId = counter++;
-    //     _mint(msg.sender ,newTokenId);
-    //     tokenURI(newTokenId);
-    //     passIssued[msg.sender] = true;
+        uint256 newTokenId = counter++;
+        _mint(msg.sender ,newTokenId);
+        tokenURI(newTokenId);
+        passIssued[msg.sender] = true;
 
-    //     return true;
-    // }
+        return true;
+    }
 
     function passIssedToAdress(address _to) external view returns(bool){
         return passIssued[_to];
