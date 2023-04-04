@@ -1,6 +1,6 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "NakamigosContracts",
+  "contractName": "NakamigosContractInterface",
   "sourceName": "contracts/Newpass.sol",
   "abi": [
     {
