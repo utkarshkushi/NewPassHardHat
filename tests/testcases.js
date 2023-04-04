@@ -2,7 +2,7 @@ const { expect } = require('chai');
 
 
 describe('Creatorism Pass Contract', function(){
-    let NakTokens;
+    
     let NewPass;
     let owner;
     let addr1;
@@ -18,6 +18,10 @@ describe('Creatorism Pass Contract', function(){
         it('checking if a address has naka nfts', async function(){
             expect(await NewPassDeploy.holdsNakaNFTs(addr1.address)).to.equal(false);
         });
+
+        it('airDropping Function', async function(){
+            expect(await NewPassDeploy.airDrop(addr2.address)).to.equal(true);
+        })
     })
 
 })

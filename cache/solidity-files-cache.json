@@ -368,8 +368,8 @@
       ]
     },
     "C:\\Users\\Dell\\OneDrive\\Desktop\\example_main_net_fork\\contracts\\Newpass.sol": {
-      "lastModificationDate": 1680604427826,
-      "contentHash": "e5c076fea312080a93038077f6eb6ffa",
+      "lastModificationDate": 1680614987962,
+      "contentHash": "cf1b53bfdd2b06df0a39d734b85748c9",
       "sourceName": "contracts/Newpass.sol",
       "solcConfig": {
         "version": "0.8.18",

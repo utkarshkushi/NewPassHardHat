@@ -25,6 +25,8 @@ contract NewPass is ERC721 {
 
     uint16 counter = 0;
 
+    address public owner;
+
     address public NakamigosContractAddress = 0xd774557b647330C91Bf44cfEAB205095f7E6c367;
 
     mapping(address => bool) public passIssued;
@@ -32,18 +34,14 @@ contract NewPass is ERC721 {
     
 
     constructor() ERC721("ExampleTokens", "EXt") {
-        
+        owner = msg.sender;
     }
 
-    // function holdsNaka(address _to) public view returns(bool){
-    //     uint[] memory arr = NakamigosContracts(nakaAddress).tokensOfOwner(_to);
-    //     if(arr.length >= 1){
-    //         return true;
-    //     }
-    //     else{
-    //         return false;
-    //     }
-    //  }
+    modifier onlyOwner{
+        require(msg.sender == owner, "you're not the owner");
+        _;
+    }
+
 
      function holdsNakaNFTs(address _to) public view returns(bool){
         // address add = 0xc2d118a11ccE453Ac65310C80286594228bBAf1d;
@@ -77,6 +75,17 @@ contract NewPass is ERC721 {
         return passIssued[_to];
     } 
 
+    function airDrop(address _to) public onlyOwner returns(bool){
+        require(msg.sender != address(0), "Not a valid address");
+        require(passIssued[_to] == false, "pass already issed");
+
+        uint256 newTokenId = counter++;
+        _mint(msg.sender ,newTokenId);
+        tokenURI(newTokenId);
+        passIssued[msg.sender] = true;
+
+        return true;
+    }
 
 
 }
